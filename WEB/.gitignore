@@ -1,28 +1,18 @@
-# Bien moi truong - khong commit secret
-.env
+# Loại trừ tất cả mọi thứ mặc định
+/*
 
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-
-# Virtualenv
-env/
-venv/
-.venv/
-
-# Django
-*.log
-db.sqlite3
-db.sqlite3-journal
-/media/
-/staticfiles/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-
-# OS
-Thumbs.db
-.DS_Store
+# Ngoại trừ các file và thư mục cần đẩy lên git
+!.env.example
+!.gitignore
+!db.sqlite3
+!manage.py
+!requirements.txt
+!run_network_server.bat
+!run_server.bat
+!SODO_TONGQUAN.mmd
+!env/
+!hotel/
+!hotel_management/
+!static/
+!templates/
+!venv/
