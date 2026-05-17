@@ -1,10 +1,18 @@
 # Loại trừ thư mục môi trường ảo và các file không cần thiết
+# Loại trừ các thư mục và file lớn không cần thiết
 env/
 venv/
 .venv/
 __pycache__/
 .env
 db.sqlite3
+Thuc Tap Do An Chuyen Nghanh/
+*.mp4
+*.rar
+*.ppt
+*.pptx
+*.pdf
+*.docx
 
 # Loại trừ các file hệ thống/IDE
 .vscode/
@@ -12,5 +20,3 @@ db.sqlite3
 *.swp
 Thumbs.db
 .DS_Store
-
-# Chỉ giữ lại các file/thư mục mã nguồn và cấu hình cần thiết
