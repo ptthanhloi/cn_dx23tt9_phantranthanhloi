@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Phòng - Hotel Premium</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: #0f172a; color: white; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; }
+        .nav-links a:hover { color: #818cf8; }
+        .booking-container { max-width: 800px; margin: 40px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .booking-title { font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 30px; color: #1e293b; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .full-width { grid-column: span 2; }
+    </style>
+</head>
+<body style="background-color: #f1f5f9;">
+    <header class="header">
+        <div class="logo"><h2><i class="fas fa-hotel"></i> Hotel Premium</h2></div>
+        <nav class="nav-links">
+            <a href="{% url 'public_home' %}">Trang Chủ</a>
+            <a href="{% url 'public_booking' %}" class="btn btn-primary" style="padding: 8px 16px;">Đặt Phòng Ngay</a>
+            <a href="{% url 'login' %}"><i class="fas fa-user"></i> Quản trị</a>
+        </nav>
+    </header>
+
+    <div class="booking-container">
+        <h1 class="booking-title">Đơn Đặt Phòng Online</h1>
+        
+        <form method="post" action="{% url 'public_booking' %}">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Tên khách hàng</label>
+                    {{ form.guest_name }}
+                    {{ form.guest_name.errors }}
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    {{ form.guest_phone }}
+                    {{ form.guest_phone.errors }}
+                </div>
+                <div class="form-group full-width">
+                    <label>Email</label>
+                    {{ form.guest_email }}
+                    {{ form.guest_email.errors }}
+                </div>
+                <div class="form-group full-width">
+                    <label>Loại phòng muốn đặt</label>
+                    {{ form.room_type }}
+                    {{ form.room_type.errors }}
+                </div>
+                <div class="form-group">
+                    <label>Ngày nhận phòng dự kiến</label>
+                    {{ form.check_in }}
+                    {{ form.check_in.errors }}
+                </div>
+                <div class="form-group">
+                    <label>Ngày trả phòng dự kiến</label>
+                    {{ form.check_out }}
+                    {{ form.check_out.errors }}
+                </div>
+                <div class="form-group">
+                    <label>Số người</label>
+                    {{ form.num_guests }}
+                    {{ form.num_guests.errors }}
+                </div>
+                <div class="form-group full-width">
+                    <label>Ghi chú thêm</label>
+                    {{ form.notes }}
+                    {{ form.notes.errors }}
+                </div>
+                
+                <div class="full-width" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">Hoàn tất Đặt Phòng</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Set default room type from URL if available
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomId = urlParams.get('room');
+            if(roomId) {
+                const select = document.getElementById('id_room_type');
+                if(select) select.value = roomId;
+            }
+        });
+    </script>
+</body>
+</html>

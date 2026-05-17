@@ -1,0 +1,21 @@
+flowchart TD
+    A[Người dùng truy cập hệ thống] --> B{Đã đăng nhập?}
+    B -- Không --> C[Chuyển đến trang đăng nhập]
+    C --> D[Nhập thông tin đăng nhập]
+    D --> E{Đăng nhập thành công?}
+    E -- Không --> C
+    E -- Có --> F[Chuyển đến trang chính]
+    B -- Có --> F
+    F --> G{Chọn chức năng}
+    G -- Đặt phòng --> H[Nhập thông tin đặt phòng]
+    H --> I[Lưu thông tin đặt phòng]
+    I --> F
+    G -- Quản lý phòng --> J[Xem, thêm, sửa, xóa phòng]
+    J --> F
+    G -- Quản lý khách hàng --> K[Xem, thêm, sửa, xóa khách hàng]
+    K --> F
+    G -- Quản lý hóa đơn --> L[Xem, tạo, xuất hóa đơn]
+    L --> F
+    G -- Thống kê, báo cáo --> M[Xem báo cáo, xuất file]
+    M --> F
+    G -- Đăng xuất --> N[Thoát hệ thống]

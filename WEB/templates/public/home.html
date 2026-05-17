@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Hotel Premium</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .hero {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('{% static "img/login_bg.png" %}');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 800; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; }
+        .room-types { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .room-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .room-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .room-card:hover { transform: translateY(-5px); }
+        .room-card-body { padding: 20px; }
+        .room-card-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        .room-card-price { color: #4f46e5; font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: #0f172a; color: white; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; }
+        .nav-links a:hover { color: #818cf8; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><h2><i class="fas fa-hotel"></i> Hotel Premium</h2></div>
+        <nav class="nav-links">
+            <a href="{% url 'public_home' %}">Trang Chủ</a>
+            <a href="{% url 'public_booking' %}" class="btn btn-primary" style="padding: 8px 16px;">Đặt Phòng Ngay</a>
+            <a href="{% url 'login' %}"><i class="fas fa-user"></i> Quản trị</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div>
+            <h1>Trải nghiệm Đẳng cấp 5 Sao</h1>
+            <p>Nơi dừng chân lý tưởng cho kỳ nghỉ của bạn với dịch vụ hoàn hảo và không gian sang trọng.</p>
+            <a href="{% url 'public_booking' %}" class="btn btn-primary btn-lg">Khám phá & Đặt phòng</a>
+        </div>
+    </div>
+
+    <div class="room-types">
+        <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem;">Các Loại Phòng Của Chúng Tôi</h2>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas fa-info-circle"></i> {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="room-grid">
+            {% for room in room_types %}
+            <div class="room-card">
+                <div class="room-card-body">
+                    <h3 class="room-card-title">{{ room.name }}</h3>
+                    <div class="room-card-price">{{ room.price_per_night }} VNĐ / Đêm</div>
+                    <p style="color: #64748b; margin-bottom: 15px;"><i class="fas fa-user-friends"></i> Tối đa: {{ room.max_guests }} khách</p>
+                    <p>{{ room.description }}</p>
+                    <a href="{% url 'public_booking' %}?room={{ room.id }}" class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 15px;">Đặt loại phòng này</a>
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; width: 100%;">Hiện chưa có thông tin loại phòng.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

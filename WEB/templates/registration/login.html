@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Hotel Premium</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="login-page-body">
+    <div class="login-wrapper">
+        <div class="login-image-side" style="background-image: url('{% static 'img/login_bg.png' %}');">
+            <div class="login-image-overlay">
+                <div class="login-quote">
+                    <h2>"Sự hài lòng của khách hàng là thước đo thành công."</h2>
+                    <p>- Trải nghiệm Đẳng cấp 5 Sao -</p>
+                </div>
+            </div>
+        </div>
+        <div class="login-form-side">
+            <div class="login-glass-box">
+                <div class="login-box-header">
+                    <div class="logo-wrapper">
+                        <div class="logo"><i class="fas fa-hotel"></i></div>
+                    </div>
+                    <h1>Hotel Premium</h1>
+                    <p>Quản trị Hệ thống</p>
+                </div>
+
+                {% if messages %}
+                    <div class="login-messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="post" class="premium-form">
+                    {% csrf_token %}
+                    <div class="form-group premium-input-group">
+                        <label for="id_username">Tên đăng nhập</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" name="username" id="id_username" class="form-control premium-input"
+                                   placeholder="Nhập tên đăng nhập" required autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group premium-input-group">
+                        <label for="id_password">Mật khẩu</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" name="password" id="id_password" class="form-control premium-input"
+                                   placeholder="Nhập mật khẩu" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-lg premium-btn">
+                            <span>Đăng nhập</span> <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
